@@ -1,12 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import App from './components/app/app';
+import {Provider} from 'react-redux';
+import store from './store';
 import * as serviceWorker from './serviceWorker';
+import ErrorBoundary from './components/error-boundary/error-boundary';
+import  'bootstrap/dist/css/bootstrap.min.css';
+import 'antd/dist/antd.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+  <Provider store={store}>
+      <ErrorBoundary>
+          <App />
+      </ErrorBoundary>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
