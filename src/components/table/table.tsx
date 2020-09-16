@@ -3,20 +3,10 @@ import useSortedData from '../../hooks/useSortedData';
 import './table.css';
 import ReactPaginate from 'react-paginate';
 import useArrayChunk from '../../hooks/useArrayChunk'
-const Table = (props:any) => {
-    console.log('ffff')
-    const itemPerPage = 50;
-    const {onSelect, data} = props;
-    const [currentPage, setCurrentPage] = useState<number>(0);
-    const {sortObj, checkSort, sortedData } = useSortedData(data);
-    const getClassNames = (name:any) => {
-        console.trace()
-        if (!sortObj) {
-          return;
-        }
-        return sortObj.key === name ? sortObj.direction : null;
-      };
 
+const Table = (props:any) => {
+
+    const itemPerPage = 50;
     const columnNames = [
         'id',
         'firstName',
@@ -24,8 +14,22 @@ const Table = (props:any) => {
         'email',
         'phone'
     ]
- 
-    const chunkData = useArrayChunk(sortedData, itemPerPage)[currentPage];
+
+    const {onSelect, data} = props;
+    const [currentPage, setCurrentPage] = useState<number>(0);
+
+    const {sortObj, checkSort, sortedData } = useSortedData(data);
+    const chunkData = useArrayChunk(sortedData, itemPerPage);
+    const currentData = chunkData[currentPage];
+    const pageCount = chunkData.length;
+
+    const getClassNames = (name:string) => {
+        if (!sortObj) {
+          return;
+        }
+        return sortObj.key === name ? sortObj.direction : null;
+      };
+
     return (
     <>
     <table className="table">
@@ -40,7 +44,7 @@ const Table = (props:any) => {
             </tr>
     </thead>
     <tbody>
-        {chunkData.map((item:any, index:number) => (
+        {currentData.map((item:any, index:number) => (
              <tr key={index} onClick={()=>onSelect(item)}>
                 <th scope='row'>{item.id}</th>
                 <td>{item.firstName}</td>
@@ -64,7 +68,7 @@ const Table = (props:any) => {
     breakClassName='page-item'
     breakLinkClassName='page-link'
     pageLinkClassName='page-link'
-    pageCount={20}
+    pageCount={pageCount}
     pageClassName='page-item'
     marginPagesDisplayed={2}
     pageRangeDisplayed={5}
