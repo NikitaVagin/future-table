@@ -1,13 +1,16 @@
 import React, {useState} from 'react';
-import useSortedData from '../../hooks/hooks';
+import useSortedData from '../../hooks/useSortedData';
 import './table.css';
 import ReactPaginate from 'react-paginate';
-
+import useArrayChunk from '../../hooks/useArrayChunk'
 const Table = (props:any) => {
+    console.log('ffff')
+    const itemPerPage = 50;
     const {onSelect, data} = props;
     const [currentPage, setCurrentPage] = useState<number>(0);
     const {sortObj, checkSort, sortedData } = useSortedData(data);
     const getClassNames = (name:any) => {
+        console.trace()
         if (!sortObj) {
           return;
         }
@@ -21,20 +24,8 @@ const Table = (props:any) => {
         'email',
         'phone'
     ]
-
-
-    const arrayChank = (arr:any, size:number) => {
-        const chunked_arr = [];
-        let index = 0;
-        while (index < arr.length) {
-        chunked_arr.push(arr.slice(index, size + index));
-        index += size;
-        }
-        return chunked_arr;
-    }
-    
-    const display = arrayChank(sortedData, 50)[currentPage];
-    debugger
+ 
+    const chunkData = useArrayChunk(sortedData, itemPerPage)[currentPage];
     return (
     <>
     <table className="table">
@@ -49,7 +40,7 @@ const Table = (props:any) => {
             </tr>
     </thead>
     <tbody>
-        {display.map((item:any, index:number) => (
+        {chunkData.map((item:any, index:number) => (
              <tr key={index} onClick={()=>onSelect(item)}>
                 <th scope='row'>{item.id}</th>
                 <td>{item.firstName}</td>
@@ -65,9 +56,16 @@ const Table = (props:any) => {
     <ReactPaginate 
     previousLabel={'previous'}
     nextLabel={'next'}
+    previousClassName='page-item'
+    nextClassName='page-item'
+    previousLinkClassName='page-link'
+    nextLinkClassName='page-link'
     breakLabel={'...'}
-    breakClassName={'break-me'}
+    breakClassName='page-item'
+    breakLinkClassName='page-link'
+    pageLinkClassName='page-link'
     pageCount={20}
+    pageClassName='page-item'
     marginPagesDisplayed={2}
     pageRangeDisplayed={5}
     onPageChange={(value) => setCurrentPage(value.selected)}

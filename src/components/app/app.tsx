@@ -8,20 +8,12 @@ import {Spin} from 'antd'
 
 //TODO Add Types
 const App = (props:any) => {
-    
     const {fetchDataStart, data, loading} = props;
-    let table;
-    if(loading === false && data == true){
-        table = <Table data={data} onSelect={props.onRowSelect} />
-    } else{
-        table = null
-    }
     
     return (
         <div>
             <DataSelected selectData={fetchDataStart}/>
-            {table}
-            {/* <Spin size='large'/> */}
+            {(data.length > 1) ? <Table data={data} onSelect={props.onRowSelect} /> : null}
             {
             // <DetailRowInfo />
             }
