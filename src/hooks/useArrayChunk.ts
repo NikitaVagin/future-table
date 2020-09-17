@@ -1,5 +1,5 @@
 
-const arrayChank = (arr:Array<object>, size:number) => {
+const useArrayChank = (arr:Array<object>, size:number) => {
     const chunked_arr = [];
     let index = 0;
     while (index < arr.length) {
@@ -9,4 +9,4 @@ const arrayChank = (arr:Array<object>, size:number) => {
     return chunked_arr;
 }
 
-export default arrayChank;
+export default useArrayChank;

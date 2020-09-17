@@ -8,7 +8,8 @@ type sortedFieldType = {
 
 const useSortedData = (data:any) => {
     const [sortObj, setSortObj] = useState<sortedFieldType>(null);
-     //Sorting with Memo
+     
+    //Sorting with Memo
      const sortedItems = useMemo(() => {
         let sortedData = [...data];
         if(sortObj !== null){
@@ -24,6 +25,7 @@ const useSortedData = (data:any) => {
         }
         return sortedData;
     }, [data, sortObj]);
+
     //Function that sets SortObject
       const checkSort = (key:string) => {
         let direction = 'ascending';

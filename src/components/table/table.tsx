@@ -1,82 +1,42 @@
-import React, {useState} from 'react';
-import useSortedData from '../../hooks/useSortedData';
+import React from 'react';
 import './table.css';
-import ReactPaginate from 'react-paginate';
-import useArrayChunk from '../../hooks/useArrayChunk'
 
-const Table = (props:any) => {
 
-    const itemPerPage = 50;
-    const columnNames = [
-        'id',
-        'firstName',
-        'lastName',
-        'email',
-        'phone'
-    ]
+type TableType = {
+    data: object[],
+    columnNames: Array<string>
+    onClickSort: Function,
+    getClassName: Function,
+    onSelectRow: Function
+}
 
-    const {onSelect, data} = props;
-    const [currentPage, setCurrentPage] = useState<number>(0);
-
-    const {sortObj, checkSort, sortedData } = useSortedData(data);
-    const chunkData = useArrayChunk(sortedData, itemPerPage);
-    const currentData = chunkData[currentPage];
-    const pageCount = chunkData.length;
-
-    const getClassNames = (name:string) => {
-        if (!sortObj) {
-          return;
-        }
-        return sortObj.key === name ? sortObj.direction : null;
-      };
+const Table = (props:TableType) => {
+    const {data, columnNames, onClickSort, getClassName, onSelectRow } = props;
 
     return (
-    <>
     <table className="table">
         <thead className='thead-dark'>
             <tr>
                 {columnNames.map((item:string, index:number) => (
-                   <th key={index} onClick={()=> checkSort(item)}>
+                   <th key={index} onClick={()=> onClickSort(item)}>
                        {item}
-                    <i className={'arrow-table ' + getClassNames(item)}></i>
+                    <i className={'arrow-table ' + getClassName(item)}></i>
                     </th> 
                 ))}
             </tr>
     </thead>
     <tbody>
-        {currentData.map((item:any, index:number) => (
-             <tr key={index} onClick={()=>onSelect(item)}>
+        {data ? data.map((item:any, index:number) => (
+             <tr key={index} onClick={()=> onSelectRow(item)}>
                 <th scope='row'>{item.id}</th>
                 <td>{item.firstName}</td>
                 <td>{item.lastName}</td>
                 <td>{item.email}</td>
                 <td>{item.phone}</td>
              </tr>
-        ))}
+        )) : <tr><td colSpan={5} align='center'><b>По Вашему запросу ничего не найдено.</b></td></tr>}
     </tbody>
-</table>
-{
-    (data.length > 50) ?
-    <ReactPaginate 
-    previousLabel={'previous'}
-    nextLabel={'next'}
-    previousClassName='page-item'
-    nextClassName='page-item'
-    previousLinkClassName='page-link'
-    nextLinkClassName='page-link'
-    breakLabel={'...'}
-    breakClassName='page-item'
-    breakLinkClassName='page-link'
-    pageLinkClassName='page-link'
-    pageCount={pageCount}
-    pageClassName='page-item'
-    marginPagesDisplayed={2}
-    pageRangeDisplayed={5}
-    onPageChange={(value) => setCurrentPage(value.selected)}
-    containerClassName={'pagination'}
-    activeClassName={'active'}
-/> : null}
-</>
+    </table>
     )
 }
 

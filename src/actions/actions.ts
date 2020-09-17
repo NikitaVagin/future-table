@@ -1,4 +1,5 @@
 import {ActionsConstants} from '../constants/constants'
+import {StateInterface} from '../reducers/table'
 
 export const fetchDataStart = (url:string) => {
     return {
@@ -6,24 +7,31 @@ export const fetchDataStart = (url:string) => {
         payload: url
     }
 }
-//TODO добавить типы array??
-export const fetchDataSuccess = (data:any) => {
+
+export const fetchDataSuccess = (data:StateInterface) => {
     return {
         type: ActionsConstants.FETCH_DATA_SUCCESS,
         payload:data
     }
 }
-//TODO добавить типы
-export const fetchDataError = (error:any) => {
+
+export const fetchDataError = (error:object) => {
     return {
         type: ActionsConstants.FETCH_DATA_ERROR,
         payload: error
     }
 }
-//TODO Add type
-export const onRowSelect = (data:any) => {
+
+export const onRowSelect = (data:StateInterface) => {
     return {
         type: ActionsConstants.ON_ROW_SELECT,
         payload: data
     }
 };
+
+export const onSearch = (data:string) => {
+    return {
+        type: ActionsConstants.ON_SEARCH,
+        payload: data
+    }
+}

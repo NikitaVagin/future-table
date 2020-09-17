@@ -20,13 +20,15 @@ export interface StateInterface {
 
         }
     ]
+    search: string | null,
     selectRowInfo : null | {},
     loading: boolean,
-    error: null | Object
+    error: null | Error
 }
 
-const initialState:StateInterface = {
+export const initialState:StateInterface = {
     data: [],
+    search: null,
     selectRowInfo: null,
     loading: false,
     error: null
@@ -40,6 +42,9 @@ const reducer = (state: StateInterface, action:ActionType) => {
         case(ActionsConstants.FETCH_DATA_START):
             return {
                 ...state,
+                data: [],
+                search: null,
+                selectRowInfo: null,
                 loading: true
             }
         case(ActionsConstants.FETCH_DATA_SUCCESS):
@@ -48,10 +53,21 @@ const reducer = (state: StateInterface, action:ActionType) => {
                 loading: false,
                 data: action.payload
             }
+        case(ActionsConstants.FETCH_DATA_ERROR):
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
         case(ActionsConstants.ON_ROW_SELECT):
             return {
                 ...state,
                 selectRowInfo: action.payload
+            }
+        case(ActionsConstants.ON_SEARCH):
+            return{
+                ...state,
+                search: action.payload
             }
     }
 }

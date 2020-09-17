@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/app/app';
+import App from './containers/App/App';
 import {Provider} from 'react-redux';
 import store from './store';
 import * as serviceWorker from './serviceWorker';
-import ErrorBoundary from './components/error-boundary/error-boundary';
+import ErrorBoundary from './containers/Error-boundary/Error-boundary';
 import  'bootstrap/dist/css/bootstrap.min.css';
 import 'antd/dist/antd.css';
 

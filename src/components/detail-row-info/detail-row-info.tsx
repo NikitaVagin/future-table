@@ -1,11 +1,25 @@
 import React from 'react';
 import {connect} from 'react-redux';
-//TODO add type
-const DetailRowInfo = (props:any) => {
-    if(!props.selectRowInfo){
+
+type DetailRowInfoType = {
+   selectRowInfo: {
+    firstName: string,
+    lastName: string,
+    description: string,
+    address: {
+        streetAddress: string,
+        city: string,
+        state: string,
+        zip: string
+        }
+   } | null
+}
+
+const DetailRowInfo = (ownProps:any) => {
+    if(!ownProps.selectRowInfo){
         return null
     }
-    const {firstName, lastName, description, address} = props.selectRowInfo;
+    const {firstName, lastName, description, address} = ownProps.selectRowInfo;
     return(
         <div>
             <p>Выбран пользователь <b>{`${firstName} ${lastName}`}</b></p>
