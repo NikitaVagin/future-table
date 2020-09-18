@@ -1,4 +1,3 @@
-
 const useArrayChank = (arr:Array<object>, size:number) => {
     const chunked_arr = [];
     let index = 0;

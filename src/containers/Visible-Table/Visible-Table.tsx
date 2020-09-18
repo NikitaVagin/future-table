@@ -17,7 +17,7 @@ const VisibleTable = (props:any) => {
         'phone'
     ];
 
-    const {onRowSelect, data, search, loading} = props;
+    const {onRowSelect, data, search} = props;
     const filterData = useFilterData(data, search);
     const [currentPage, setCurrentPage] = useState<number>(0);
     const {sortObj, checkSort, sortedData } = useSortedData(filterData);
@@ -59,11 +59,10 @@ const VisibleTable = (props:any) => {
     )
 }
 
-const mapStateToProps = ({table: {data, loading, search}}:any) => {
+const mapStateToProps = ({table: {data, search}}:any) => {
     return {
         search,
-        data,
-        loading
+        data
     }
 } 
 
