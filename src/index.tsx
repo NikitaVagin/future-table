@@ -6,12 +6,11 @@ import store from './store';
 import * as serviceWorker from './serviceWorker';
 import ErrorBoundary from './containers/Error-boundary/Error-boundary';
 import  'bootstrap/dist/css/bootstrap.min.css';
-import 'antd/dist/antd.css';
 
 ReactDOM.render(
   <React.StrictMode>
   <Provider store={store}>
-      <ErrorBoundary>
+      <ErrorBoundary >
           <App />
       </ErrorBoundary>
     </Provider>

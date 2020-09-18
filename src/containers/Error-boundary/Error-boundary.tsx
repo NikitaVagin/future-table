@@ -1,11 +1,9 @@
-
-import React, { Ref, Key } from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
-import {Alert} from 'antd'
 
 
 interface isState {
-    hasError: boolean
+    hasError: any
 }
 interface PropsType  {
     error?: any
@@ -14,26 +12,28 @@ interface PropsType  {
 
 class ErrorBoundary extends React.Component<PropsType, isState> {
     state = {
-        hasError: false
+        hasError: null
     }
-    hasError(){
-        console.log(this.props);
-        if(this.props.error){
+
+    componentDidCatch(error:any, errorInfo:any){
+        this.setState({
+            hasError: errorInfo.componentStack
+        })
+    }
+    componentDidUpdate(prevProps:PropsType){
+        if(this.props.error !== prevProps.error){
             this.setState({
-                hasError: true
+                hasError: this.props.error.message
             })
         }
     }
-    componentDidCatch(){
-        this.setState({
-            hasError: true
-        })
-    }
-
     render() {
         if(this.state.hasError){
-            return <Alert message='Error' description='
-            This is an error message that indicates something' type='error' showIcon/>
+            return (
+                <div className="alert alert-danger" role="alert">
+                        {this.state.hasError}
+                </div>
+            )
         }
         return (
             this.props.children
@@ -41,10 +41,10 @@ class ErrorBoundary extends React.Component<PropsType, isState> {
     }
 }
 
-const mapStateToProps = (state:any) => {
+const mapStateToProps = (state:any, ownProps:any) => {
     return {
-        error: state.table.error
+        error: state.table.error,
+        ownProps
     }
 }
-
 export default connect(mapStateToProps, null)(ErrorBoundary);

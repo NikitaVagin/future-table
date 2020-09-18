@@ -12,7 +12,6 @@ type TableType = {
 
 const Table = (props:TableType) => {
     const {data, columnNames, onClickSort, getClassName, onSelectRow } = props;
-
     return (
     <table className="table">
         <thead className='thead-dark'>

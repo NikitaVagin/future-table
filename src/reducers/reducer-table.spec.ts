@@ -1,4 +1,4 @@
-import mockApi from '../../__mocks__/mock-api'
+import mockApi from '../__mocks__/mock-api'
 import reducer, {initialState, StateInterface} from './table'
 import {ActionsConstants, UrlData} from '../constants/constants'
 

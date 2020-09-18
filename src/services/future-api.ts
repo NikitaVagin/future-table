@@ -9,7 +9,6 @@ export default class FutureApi {
             if(!res.ok){
                 throw new Error(`Не могу получить информацию из ${url}, возвращает ${res.status}`);
             }
-            console.log(res.json());
             return await res.json();
         }
 

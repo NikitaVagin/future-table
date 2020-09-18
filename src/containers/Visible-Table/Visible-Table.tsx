@@ -33,7 +33,7 @@ const VisibleTable = (props:any) => {
       };
     return (
     <>
-    <Table columnNames={columnNames} data={currentData} onClickSort=    {checkSort} getClassName={getClassNames} onSelectRow={onRowSelect}/>
+    <Table columnNames={columnNames} data={currentData} onClickSort={checkSort} getClassName={getClassNames} onSelectRow={onRowSelect}/>
 {
     (data.length > itemPerPage) ?
     <ReactPaginate 

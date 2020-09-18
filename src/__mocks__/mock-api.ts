@@ -55,20 +55,6 @@ const mockApiData = [
         zip: "87917"
       },
       description: "rutrum eget lorem lacus rutrum pulvinar placerat neque at lorem sollicitudin velit suspendisse convallis augue vel sit aliquam nunc consequat nunc vitae suspendisse placerat et suspendisse placerat libero mattis vel magna suspendisse"
-    },
-    {
-      id: 957,
-      firstName: "Hugh",
-      lastName: "Cohen",
-      email: "BFlamme@libero.io",
-      phone: "(838)638-0563",
-      address: {
-        streetAddress: "704 At Ln",
-        city: "Duck River",
-        state: "MO",
-        zip: "72090"
-      },
-      description: "pulvinar convallis malesuada dolor etiam nunc adipiscing massa mattis tellus pretium adipiscing non rutrum hendrerit sapien sollicitudin sit orci massa lorem morbi odio etiam vel neque facilisis pulvinar facilisis molestie placerat amet"
     }
 ];
 

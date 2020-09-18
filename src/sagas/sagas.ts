@@ -1,16 +1,16 @@
 import {put, takeEvery, all, call} from 'redux-saga/effects';
-import FutureApi from './services/future-api';
-import {fetchDataSuccess, fetchDataError} from './actions/actions';
-import { ActionsConstants } from './constants/constants';
+import FutureApi from '../services/future-api';
+import {fetchDataSuccess, fetchDataError} from '../actions/actions';
+import { ActionsConstants } from '../constants/constants';
 
 const futureService = new FutureApi();
 
 
-function* waitGetData (){
+export function* waitGetData (){
     yield takeEvery(ActionsConstants.FETCH_DATA_START, fetchData)
 }
 
-function* fetchData (arg:any) {
+export function* fetchData (arg:any) {
     try{
         const data = yield call(() => futureService.getDataApi(arg.payload));
         yield put(fetchDataSuccess(data));
