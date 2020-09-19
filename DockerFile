@@ -1,10 +1,10 @@
 FROM node:12.18.3-alpine
 
-RUN mkdir -p/usr/src/table-app
-WORKDIR /usr/src/table-app
+WORKDIR /app
 
 COPY package.json .
 COPY package-lock.json .
 RUN npm install
 COPY . .
+EXPOSE 3000
 CMD ["npm", "start"]
