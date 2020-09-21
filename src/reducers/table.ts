@@ -34,7 +34,7 @@ export const initialState:StateInterface = {
     error: null
 }
 
-const reducer = (state: StateInterface, action:ActionType) => {
+const reducer = (state: any, action:ActionType) => {
     if(typeof state === 'undefined'){
         return initialState
     }
@@ -69,7 +69,19 @@ const reducer = (state: StateInterface, action:ActionType) => {
                 ...state,
                 search: action.payload
             }
+        case(ActionsConstants.ADD_ROW_TABLE):
+            return{
+                ...state,
+                data: addRowTable(state.data, action.payload)
+            }
     }
 }
+
+//Convert string id to number
+const addRowTable = (data:any, payload:any) => {
+    payload.id = Number(payload.id);
+    return [payload, ...data]
+}
+
 
 export default reducer;

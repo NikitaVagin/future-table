@@ -3,7 +3,9 @@ export enum ActionsConstants {
     FETCH_DATA_SUCCESS = 'FETCH_DATA_SUCCESS',
     FETCH_DATA_ERROR = 'FETCH_DATA_ERROR',
     ON_ROW_SELECT = 'ON_ROW_SELECT',
-    ON_SEARCH = 'ON_SEARCH'
+    ON_SEARCH = 'ON_SEARCH',
+    ADD_ROW_TABLE = 'ADD_ROW_TABLE'
+
 }
 
 export enum UrlData {

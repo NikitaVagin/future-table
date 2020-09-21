@@ -6,6 +6,8 @@ import useSortedData from '../../hooks/useSortedData';
 import ReactPaginate from 'react-paginate';
 import useArrayChunk from '../../hooks/useArrayChunk'
 import useFilterData from '../../hooks/useFilterData';
+import FormForTable from '../../containers/Form-for-table/Form-for-table'
+
 
 const VisibleTable = (props:any) => {
     const itemPerPage = 50;
@@ -33,6 +35,7 @@ const VisibleTable = (props:any) => {
       };
     return (
     <>
+    <FormForTable />
     <Table columnNames={columnNames} data={currentData} onClickSort={checkSort} getClassName={getClassNames} onSelectRow={onRowSelect}/>
 {
     (data.length > itemPerPage) ?

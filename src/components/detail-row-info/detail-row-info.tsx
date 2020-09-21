@@ -15,19 +15,24 @@ type DetailRowInfoType = {
    } | null
 }
 
-const DetailRowInfo = (ownProps:any) => {
-    if(!ownProps.selectRowInfo){
+const DetailRowInfo = (props:any) => {
+    if(!props.selectRowInfo){
         return null
     }
-    const {firstName, lastName, description, address} = ownProps.selectRowInfo;
+    const {firstName, lastName, description, address} = props.selectRowInfo;
     return(
         <div>
             <p>Выбран пользователь <b>{`${firstName} ${lastName}`}</b></p>
-            <textarea value={description} readOnly/>
+            {description ? <textarea value={description} readOnly/> : null}
+            {address ?
+            <>
             <p>Адрес проживания: <b>{address.streetAddress}</b></p>
             <p>Город: <b>{address.city}</b></p>
             <p>Провинция/штат: <b>{address.state}</b></p>
             <p>Индекс: <b>{address.zip}</b></p>
+            </> :
+            null
+            }
         </div>
     )
 };

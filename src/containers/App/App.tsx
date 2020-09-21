@@ -7,7 +7,6 @@ import DataSelected from '../../components/data-selector/data-selector'
 import DetailRowInfo from '../../components/detail-row-info/detail-row-info';
 import Spinner from '../../components/spinner/spinner'
 
-
 type AppType = {
     fetchDataStart: Function,
     data: Array<object> | [],
@@ -52,7 +51,5 @@ const  mapDispatchToProps = (dispatch:Function) => {
 
     }
 }
-
-debugger
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

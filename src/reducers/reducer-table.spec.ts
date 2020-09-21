@@ -73,5 +73,15 @@ describe('Test reducer table', () => {
             search: action.payload
         })
     })
+    it('Add new Row to Table', () => {
+        const action = {
+            type: ActionsConstants.ADD_ROW_TABLE,
+            payload: mockApi[0]
+        }
+
+        const newState = reducer(initialState, action);
+        expect(newState.data.length).toEqual(initialState.data.length + 1)
+    
+    })
 })
 

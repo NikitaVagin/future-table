@@ -35,3 +35,9 @@ export const onSearch = (data:string) => {
         payload: data
     }
 }
+export const addRowTable = (data:object) => {
+    return{
+        type: ActionsConstants.ADD_ROW_TABLE,
+        payload: data
+    }
+}
